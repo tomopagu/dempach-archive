@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var archiver = require('./archiver');
 var CronJob = require('cron').CronJob;
-new CronJob('00 00 22 * * 0', function () {
+new CronJob('00 00 22 * * 1', function () {
 	archiver();
 }, null, true, 'Europe/London');
 
