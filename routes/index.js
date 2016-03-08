@@ -11,7 +11,11 @@ router.get('/', function (req, res, next) {
 		var shows = [];
 
 		_.forEach(files, function (file) {
-			if (file !== '.DS_Store' || file !== '.gitignore') {
+			if (file === '.DS_Store') {
+				// Don't Add to Shows
+			} else if (file === '.gitignore') {
+				// Don't Add to Shows
+			} else {
 				var date = file.replace('.mp3', '');
 				date = date.split('_')[1];
 				date = moment(date).format('MMMM Do YYYY');
