@@ -11,10 +11,6 @@ new CronJob('00 00 22 * * 1', function () {
 	archiver();
 }, null, true, 'Europe/London');
 
-// new CronJob('30 * * * * *', function () {
-// 	archiver();
-// }, null, true, 'Europe/London');
-
 var routes = require('./routes/index');
 
 var app = express();

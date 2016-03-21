@@ -15,8 +15,8 @@ var archiver = function () {
 			console.log('Got StreamUrl: ' + streamurl);
 
 			request('http:' + streamurl, function (error, response, body) {
-				body = body.replace('( {"Streams": [', '');
-				body = body.replace('] });', '');
+				body = body.replace('{ "Streams": [', '');
+				body = body.replace('] }', '');
 
 				var json = JSON.parse(body);
 				var directMP3 = json.Url;
