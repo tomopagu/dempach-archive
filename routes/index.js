@@ -13,6 +13,8 @@ router.get('/', function (req, res, next) {
 		_.forEach(files, function (file) {
 			if (file === '.DS_Store') {
 				// Don't Add to Shows
+			} else if (file === 'ENV') {
+				// Don't Add to Shows
 			} else if (file === '.gitignore') {
 				// Don't Add to Shows
 			} else {
