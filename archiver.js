@@ -1,6 +1,8 @@
-var fs = require('fs');
 var path = require('path');
 var request = require('request');
+
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3();
 
 var archiver = function () {
 	var url = 'http://tunein.com/radio/DEMPA-ch-TOKYO-DEMPA-INTERNATIONAL-p762248/';
@@ -24,10 +26,26 @@ var archiver = function () {
 
 				console.log('Got the DirectMP3 URL: ' + directMP3);
 
-				var downloadStream = fs.createWriteStream('./public/shows/' + filename);
-				request(directMP3).pipe(downloadStream);
-				downloadStream.on('finish', function () {
-					console.log('Completed!');
+				request(directMP3, function(error, response, body) {
+					if (error || response.statusCode !== 200) { 
+						console.log("failed to get stream");
+						console.log(error);
+					} else {
+						console.log('Starting to upload to s3');
+						var params = {
+							Bucket: 'pagu-dempach-archiver',
+							Key: `shows/${filename}`,
+							ACL: 'public-read',
+							Body: body,
+						};
+						s3.upload(params, function(error, data) { 
+							if (error) {
+								console.log("error downloading image to s3");
+							} else {
+								console.log("success uploading to s3");
+							}
+						}); 
+					}   
 				});
 			});
 		}
