@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var path = require('path');
 var request = require('request');
 

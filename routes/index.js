@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var _ = require('lodash');
 var moment = require('moment');
 
