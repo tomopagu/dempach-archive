@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "deploy": "now -e AWS_ACCESS_KEY_ID=@aws_access_key_id -e AWS_SECRET_ACCESS_KEY=@aws_secret_access_key",
+    "deploy": "now -e AWS_ACCESS_KEY_ID=@aws_access_key_id -e AWS_SECRET_ACCESS_KEY=@aws_secret_access_key -e NOW_LOGS_KEY=@now_logs_key",
     "start": "node app.js"
   },
   "dependencies": {
@@ -15,6 +15,7 @@
     "lodash": "^4.5.1",
     "moment": "^2.11.2",
     "node-sass-middleware": "0.8.0",
+    "now-logs": "^0.0.7",
     "request": "^2.69.0"
   }
 }

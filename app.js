@@ -1,3 +1,6 @@
+require('dotenv').config();
+require('now-logs')(process.env.NOW_LOGS_KEY);
+
 var express = require('express');
 var path = require('path');
 
