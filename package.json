@@ -6,6 +6,9 @@
     "deploy": "now -e AWS_ACCESS_KEY_ID=@aws_access_key_id -e AWS_SECRET_ACCESS_KEY=@aws_secret_access_key -e NOW_LOGS_KEY=@now_logs_key",
     "start": "node app.js"
   },
+  "now": {
+    "alias": "dempach-archive.uchuu.io"
+  },
   "dependencies": {
     "aws-sdk": "^2.6.11",
     "cron": "^1.1.0",
