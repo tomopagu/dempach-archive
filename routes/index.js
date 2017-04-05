@@ -13,6 +13,8 @@ var params = {
 	Prefix: 'shows'
 };
 
+var archiver = require('./../archiver');
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
 	s3.listObjectsV2(params, function(err, data) {
@@ -41,5 +43,10 @@ router.get('/', function (req, res, next) {
 		}
 	});
 });
+
+router.get('/archive', function (req, res, next) {
+	archiver();
+	res.render('archiver');
+})
 
 module.exports = router;
