@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path: './../../envs/dempach-env'});
 
 var _ = require('lodash');
 var moment = require('moment');

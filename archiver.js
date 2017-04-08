@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path: './../envs/dempach-env'});
 
 var path = require('path');
 var request = require('request');

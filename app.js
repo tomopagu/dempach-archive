@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path: './../envs/dempach-env'});
 require('now-logs')(process.env.NOW_LOGS_KEY);
 
 var express = require('express');
