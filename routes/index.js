@@ -1,7 +1,5 @@
-require('dotenv').config({path: './../../envs/dempach-env'});
-
 var _ = require('lodash');
-var moment = require('moment');
+var format = require('date-fns/format');
 
 var express = require('express');
 var router = express.Router();
@@ -28,7 +26,7 @@ router.get('/', function (req, res, next) {
 					var file = fileData.Key;
 					var date = file.replace('.mp3', '');
 					date = date.split('_')[1];
-					date = moment(date).format('MMMM Do YYYY');
+					date = format(date, 'MMMM Do YYYY');
 					var show = {
 						date: date,
 						link: `https://s3-eu-west-1.amazonaws.com/${params.Bucket}/${file}`,

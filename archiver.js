@@ -1,4 +1,4 @@
-require('dotenv').config({path: './../envs/dempach-env'});
+var format = require('date-fns/format');
 
 var path = require('path');
 var request = require('request');
@@ -38,40 +38,21 @@ var urlToS3 = function(url, params, callback) {
 }
 
 var archiver = function () {
-	var url = 'http://tunein.com/radio/DEMPA-ch-TOKYO-DEMPA-INTERNATIONAL-p762248/';
+	var baseurl = 'http://aod.tokyofmworld.leanstream.co/storage/tunein_ondemand/';
+	var today = format(new Date(), 'YYYYMMDD');
+	var filename = `dempa_${today}.mp3`;
+	var url = `${baseurl}${filename}`;
 
-	console.log('Starting Archive: ' + url);
+	var params = {
+		Bucket: 'pagu-dempach-archiver',
+		Key: `shows/${filename}`,
+		ACL: 'public-read',
+		ContentType: 'audio/mpeg',
+	};
 
-	request(url, function (error, response, body) {
-		if (!error && response.statusCode == 200) {
-			var re = /"StreamUrl":"([a-z.A-Z/?=0-9&%]*)/g;
-			var streamurl = re.exec(body)[1];
-
-			console.log('Got StreamUrl: ' + streamurl);
-
-			request('http:' + streamurl, function (error, response, body) {
-				body = body.replace('{ "Streams": [', '');
-				body = body.replace('] }', '');
-
-				var json = JSON.parse(body);
-				var directMP3 = json.Url;
-				var filename = path.basename(directMP3);
-
-				console.log('Got the DirectMP3 URL: ' + directMP3);
-				console.log('Starting to upload to s3');
-				var params = {
-					Bucket: 'pagu-dempach-archiver',
-					Key: `shows/${filename}`,
-					ACL: 'public-read',
-					ContentType: 'audio/mpeg',
-				};
-
-				urlToS3(directMP3, params, function(error, data) {
-					if (error) return console.log(error);
-					console.log("The resource URL on S3 is:", data);
-				});
-			});
-		}
+	urlToS3(url, params, function(error, data) {
+		if (error) return console.log(error);
+		console.log("The resource URL on S3 is:", data);
 	});
 };
 
