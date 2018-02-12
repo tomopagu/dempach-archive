@@ -4,14 +4,11 @@ var format = require('date-fns/format');
 var express = require('express');
 var router = express.Router();
 
-var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 var params = {
 	Bucket: 'pagu-dempach-archiver',
 	Prefix: 'shows'
 };
-
-var archiver = require('./../archiver');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -41,10 +38,5 @@ router.get('/', function (req, res, next) {
 		}
 	});
 });
-
-router.get('/archive', function (req, res, next) {
-	archiver();
-	res.render('archiver');
-})
 
 module.exports = router;

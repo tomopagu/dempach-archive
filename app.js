@@ -1,15 +1,10 @@
 var express = require('express');
 var path = require('path');
 
-var archiver = require('./archiver');
-var CronJob = require('cron').CronJob;
-new CronJob('00 00 22 * * 1', function () {
-	archiver();
-}, null, true, 'Europe/London');
-
 var routes = require('./routes/index');
 
 var app = express();
+var { PORT = 3000 } = process.env;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -57,8 +52,6 @@ app.use(function (err, req, res, next) {
 	});
 });
 
-app.listen(5000, function () {
-  console.log('Listening on port 5000!');
-});
+app.listen(PORT);
 
 module.exports = app;

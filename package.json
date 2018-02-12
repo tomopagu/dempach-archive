@@ -1,22 +1,15 @@
 {
   "name": "dempach-archive",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
-    "deploy": "now -e AWS_ACCESS_KEY_ID=@aws_access_key_id -e AWS_SECRET_ACCESS_KEY=@aws_secret_access_key",
     "start": "node app.js"
   },
-  "now": {
-    "alias": "dempach-archive.uchuu.io"
-  },
   "dependencies": {
-    "aws-sdk": "^2.6.11",
-    "cron": "^1.1.0",
     "date-fns": "^1.28.5",
     "express": "~4.13.1",
     "hbs": "~3.1.0",
     "lodash": "^4.5.1",
-    "node-sass-middleware": "0.8.0",
-    "request": "^2.69.0"
+    "node-sass-middleware": "0.8.0"
   }
 }
